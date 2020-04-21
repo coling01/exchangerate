@@ -4,7 +4,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import client.exchangerate.ExchangeRates;
+import client.exchangerate.ClientExchangeRates;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.client.WireMock;
@@ -15,8 +15,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
@@ -31,7 +29,7 @@ public class ExternalApiClientTest {
   public WireMockRule wireMockRule = new WireMockRule(8800);
 
   @Before
-  public void before(){
+  public void before() {
     ObjectMapper objectMapper = new ObjectMapper();
     externalApiClient = new ExternalApiClient(new RestTemplateBuilder().build(), "http://localhost:8800/stubbed", objectMapper);
   }
@@ -39,9 +37,8 @@ public class ExternalApiClientTest {
   @Test
   public void shouldMapJsonToGeneratedResponseObject() throws JsonProcessingException {
     stubApiClient("/stubbed/2020-01-10", 200, clientResponseJson());
-    ResponseEntity<ExchangeRates> response = externalApiClient.getExchangeRates("2020-01-10");
-    assertEquals(HttpStatus.OK, response.getStatusCode());
-    assertResponseBody(response.getBody());
+    ClientExchangeRates response = externalApiClient.getExchangeRates("2020-01-10");
+    assertResponseBody(response);
   }
 
   @Test(expected = HttpClientErrorException.class)
@@ -69,7 +66,7 @@ public class ExternalApiClientTest {
     return "{\"base\":\"EUR\",\"rates\":{\"GBP\":0.85215,\"HKD\":8.6978,\"USD\":1.1194},\"date\":\"2020-01-06\"}";
   }
 
-  private void assertResponseBody(ExchangeRates exchangeRates){
+  private void assertResponseBody(ClientExchangeRates exchangeRates) {
     assertEquals("EUR", exchangeRates.getBase());
     assertEquals(3, exchangeRates.getRates().size());
     assertEquals("0.85215", exchangeRates.getRates().get("GBP").toString());
