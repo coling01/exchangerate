@@ -1,29 +1,44 @@
 package com.exercise.exchangerategw.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import server.exchangerate.ExchangeRates;
+import static java.util.Arrays.asList;
+import com.exercise.exchangerategw.client.ExternalApiClient;
+import java.time.LocalDate;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
-class ExchangeRateServiceTest {
+@RunWith(MockitoJUnitRunner.class)
+public class ExchangeRateServiceTest {
+
+  @Mock
+  DatesService datesService;
+  @Mock
+  private ExternalApiClient externalApiClient;
+  @Mock
+  private MapperService mapperService;
 
   private ExchangeRateService exchangeRateService;
 
-  @BeforeEach
+  @Before
   public void before(){
-    exchangeRateService = new ExchangeRateService();
+    exchangeRateService = new ExchangeRateService(datesService, externalApiClient, mapperService);
   }
 
   @Test
-  public void shouldReturnPopulatedExchangeRateObject(){
-    ExchangeRates exchangeRate = exchangeRateService.getExchangeRate();
-    assertEquals("EUR", exchangeRate.getBase());
-    assertEquals(1, exchangeRate.getCurrencies().size());
-    assertEquals("GBP", exchangeRate.getCurrencies().get(0).getCurrencyCode());
-    assertEquals(1, exchangeRate.getCurrencies().get(0).getRates().size());
-    assertEquals("2020-04-20", exchangeRate.getCurrencies().get(0).getRates().get(0).getDate());
-    assertEquals(0.802f, exchangeRate.getCurrencies().get(0).getRates().get(0).getRate());
+  public void shouldCallUnderlyingServices() {
+    when(datesService.calcTargetDates(any(LocalDate.class))).thenReturn(asList(LocalDate.now()));
+    exchangeRateService.getExchangeRate(LocalDate.of(2020,1,31));
+    verify(datesService).calcTargetDates(any(LocalDate.class));
+    verify(externalApiClient).getExchangeRates(anyString());
+    verify(mapperService).mapClientExchangeRates(anyList());
   }
 
 }

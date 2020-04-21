@@ -1,6 +1,7 @@
 package com.exercise.exchangerategw.client;
 
 import client.exchangerate.ClientExchangeRates;
+import com.exercise.exchangerategw.exceptions.MappingException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -21,11 +22,16 @@ public class ExternalApiClient {
     this.objectMapper = objectMapper;
   }
 
-  public ClientExchangeRates getExchangeRates(String date) throws JsonProcessingException {
+  public ClientExchangeRates getExchangeRates(String date) {
     final String url = baseUrl + "/" + date;
     log.info("Requesting external exchange rates from:{}", url);
-    ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
-    return objectMapper.readValue(response.getBody(), ClientExchangeRates.class);
+    try {
+      ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+      return objectMapper.readValue(response.getBody(), ClientExchangeRates.class);
+    } catch (JsonProcessingException e) {
+      log.error("Failed to parse client response to ClientExchangeRates.class", e);
+      throw new MappingException("Failed to parse client response");
+    }
   }
 
 }

@@ -21,7 +21,7 @@ public class MapperServiceTest {
   }
 
   @Test(expected = MappingException.class)
-  public void shouldThrowExceptionWhenDifferentBases() throws MappingException {
+  public void shouldThrowExceptionWhenDifferentBases() {
     ClientExchangeRates rates1 = new ClientExchangeRates();
     rates1.setBase("EUR");
     ClientExchangeRates rates2 = new ClientExchangeRates();
@@ -30,7 +30,7 @@ public class MapperServiceTest {
   }
 
   @Test
-  public void shouldMapSingleClientResponseToServerResponse() throws MappingException {
+  public void shouldMapSingleClientResponseToServerResponse() {
     ExchangeRates exchangeRates = mapperService.mapClientExchangeRates(asList(mockExchangeRates1(), mockExchangeRates2()));
     assertEquals("EUR", exchangeRates.getBase());
     assertEquals(1, exchangeRates.getCurrencies().size());

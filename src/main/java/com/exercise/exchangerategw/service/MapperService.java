@@ -16,7 +16,7 @@ import server.exchangerate.ExchangeRates;
 @Service
 public class MapperService {
 
-  ExchangeRates mapClientExchangeRates(List<ClientExchangeRates> inboundRates) throws MappingException {
+  ExchangeRates mapClientExchangeRates(List<ClientExchangeRates> inboundRates) {
     ExchangeRates outbound = new ExchangeRates();
     for (ClientExchangeRates inbound : inboundRates) {
       mapBaseCurrency(outbound, inbound.getBase());
@@ -25,7 +25,7 @@ public class MapperService {
     return outbound;
   }
 
-  private void mapBaseCurrency(ExchangeRates outbound, String inboundBase) throws MappingException {
+  private void mapBaseCurrency(ExchangeRates outbound, String inboundBase) {
     if(outbound.getBase()!=null && outbound.getBase()!=inboundBase){
       log.error("Mapping error. ExchangeRate base:{} differs from base:{}", outbound.getBase(), inboundBase);
       throw new MappingException("None matching base rates from client");
@@ -33,7 +33,7 @@ public class MapperService {
     outbound.setBase(inboundBase);
   }
 
-  private void mapRates(ExchangeRates outbound, List<ClientExchangeRates> inboundRates) throws MappingException {
+  private void mapRates(ExchangeRates outbound, List<ClientExchangeRates> inboundRates) {
     Map<String,List<ExchangeRate>> ratesByCurrency=new HashMap<>();
     for (ClientExchangeRates inbound : inboundRates) {
       Map<String,String> rates = inbound.getRates();
