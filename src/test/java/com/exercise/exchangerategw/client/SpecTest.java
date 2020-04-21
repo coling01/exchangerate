@@ -2,7 +2,7 @@ package com.exercise.exchangerategw.client;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import client.exchangerate.ExchangeRates;
+import client.exchangerate.ClientExchangeRates;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
@@ -11,7 +11,7 @@ public class SpecTest {
 
   @Test
   public void shouldMapClientApiResponseToExchangeRatesObject() throws JsonProcessingException {
-    ExchangeRates exchangeRates = new ObjectMapper().readValue(clientResponseJson(), ExchangeRates.class);
+    ClientExchangeRates exchangeRates = new ObjectMapper().readValue(clientResponseJson(), ClientExchangeRates.class);
     assertEquals("EUR", exchangeRates.getBase());
     assertEquals(3, exchangeRates.getRates().size());
     assertEquals("0.85215", exchangeRates.getRates().get("GBP").toString());

@@ -25,11 +25,11 @@ paths:
                             schema:
                                 type: array
                                 items:
-                                    $ref: '#/components/schemas/ExchangeRates'
+                                    $ref: '#/components/schemas/ClientExchangeRates'
 
 components:
     schemas:
-        ExchangeRates:
+        ClientExchangeRates:
             description: Exchange rates for a single currency on multiple dates
             type: object
             properties:
@@ -37,12 +37,12 @@ components:
                     description: The base currency i.e. EUR
                     type: string
                 rates:
-                      $ref: '#/components/schemas/CurrencyRates'
+                      $ref: '#/components/schemas/ClientCurrencyRates'
                 date:
                     description: Date of exchange rate yyyy-mm-dd
                     type: string
 
-        CurrencyRates:
+        ClientCurrencyRates:
             description: Exchange rate on a given date
             type: object
             additionalProperties:
