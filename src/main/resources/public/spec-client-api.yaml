@@ -1,0 +1,49 @@
+openapi: '3.0.0'
+info:
+    version: 1.0.0
+    title: Exchange rate API
+    description: Client spec to get apirates from api.ratesapi.io
+
+paths:
+    /api/{date}:
+        get:
+            description: Get rates for base currency, single date and comma list of currencies. i.e. https://api.ratesapi.io/api/2020-01-12?base=EUR&symbols=GBP,HKD,USD
+            parameters:
+                -   in: path
+                    name: date
+                    description: The date of the requested exchange rates
+                    schema:
+                        type: string
+                        format: date
+                    required: true
+
+            responses:
+                '200':
+                    description: Object containing exchange rates information
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/ExchangeRates'
+
+components:
+    schemas:
+        ExchangeRates:
+            description: Exchange rates for a single currency on multiple dates
+            type: object
+            properties:
+                base:
+                    description: The base currency i.e. EUR
+                    type: string
+                rates:
+                      $ref: '#/components/schemas/CurrencyRates'
+                date:
+                    description: Date of exchange rate yyyy-mm-dd
+                    type: string
+
+        CurrencyRates:
+            description: Exchange rate on a given date
+            type: object
+            additionalProperties:
+                type: string
