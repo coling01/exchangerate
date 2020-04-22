@@ -36,9 +36,10 @@ public class MapperService {
   private void mapRates(ExchangeRates outbound, List<ClientExchangeRates> inboundRates) {
     Map<String, List<ExchangeRate>> ratesByCurrency = new HashMap<>();
     for (ClientExchangeRates inbound : inboundRates) {
-      Map<String, String> rates = inbound.getRates();
-      for (String currency : rates.keySet()) {
-        addRateToList(ratesByCurrency, currency, inbound.getDate(), rates.get(currency));
+      // The client response returns a map of <String,Double>
+      Map<String, Double> rates = inbound.getRates();
+      for (Map.Entry entry : rates.entrySet()) {
+        addRateToList(ratesByCurrency, (String) entry.getKey(), inbound.getDate(), ((Double) entry.getValue()).floatValue());
       }
     }
     List<CurrencyExchangeRate> currencyList = new ArrayList<>();
@@ -51,14 +52,10 @@ public class MapperService {
     outbound.setCurrencies(currencyList);
   }
 
-  private void addRateToList(Map<String, List<ExchangeRate>> ratesByCurrency, final String currency, final String date, final String rate) {
+  private void addRateToList(Map<String, List<ExchangeRate>> ratesByCurrency, final String currency, final String date, final Float rate) {
     ExchangeRate exchangeRate = new ExchangeRate();
     exchangeRate.setDate(date);
-    try {
-      exchangeRate.setRate(Float.valueOf(rate));
-    } catch (Exception e) {
-      log.error("Casting error ..." + e);
-    }
+    exchangeRate.setRate(rate);
     if (ratesByCurrency.containsKey(currency)) {
       List<ExchangeRate> dateList = ratesByCurrency.get(currency);
       dateList.add(exchangeRate);

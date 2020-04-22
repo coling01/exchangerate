@@ -20,9 +20,9 @@ public class ExchangeRateService {
     this.mapperService = mapperService;
   }
 
-  public ExchangeRates getExchangeRate(LocalDate startDate) {
+  public ExchangeRates getExchangeRate(final LocalDate startDate, final String currencyCodes) {
     List<ClientExchangeRates> responses = datesService.calcTargetDates(startDate).stream()
-      .map(date -> externalApiClient.getExchangeRates(date.toString())).collect(Collectors.toList());
+      .map(date -> externalApiClient.getExchangeRates(date.toString(), currencyCodes)).collect(Collectors.toList());
     return mapperService.mapClientExchangeRates(responses);
   }
 

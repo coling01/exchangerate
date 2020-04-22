@@ -45,7 +45,7 @@ public class MapperServiceTest {
   private ClientExchangeRates mockExchangeRates1() {
     ClientExchangeRates clientExchangeRates = new ClientExchangeRates();
     clientExchangeRates.setBase("EUR");
-    Map<String, String> rates = Collections.singletonMap("GBP", "0.801");
+    Map<String, Double> rates = Collections.singletonMap("GBP", 0.801);
     clientExchangeRates.setRates(rates);
     clientExchangeRates.setDate("2020-02-28");
     return clientExchangeRates;
@@ -54,7 +54,7 @@ public class MapperServiceTest {
   private ClientExchangeRates mockExchangeRates2() {
     ClientExchangeRates clientExchangeRates = new ClientExchangeRates();
     clientExchangeRates.setBase("EUR");
-    Map<String, String> rates = Collections.singletonMap("GBP", "0.799");
+    Map<String, Double> rates = Collections.singletonMap("GBP", 0.799);
     clientExchangeRates.setRates(rates);
     clientExchangeRates.setDate("2020-01-28");
     return clientExchangeRates;
