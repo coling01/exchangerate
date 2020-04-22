@@ -35,9 +35,9 @@ public class ExchangeRateServiceTest {
   @Test
   public void shouldCallUnderlyingServices() {
     when(datesService.calcTargetDates(any(LocalDate.class))).thenReturn(asList(LocalDate.now()));
-    exchangeRateService.getExchangeRate(LocalDate.of(2020,1,31));
+    exchangeRateService.getExchangeRate(LocalDate.of(2020,1,31), "GBD,HKD,USD");
     verify(datesService).calcTargetDates(any(LocalDate.class));
-    verify(externalApiClient).getExchangeRates(anyString());
+    verify(externalApiClient).getExchangeRates(anyString(), anyString());
     verify(mapperService).mapClientExchangeRates(anyList());
   }
 

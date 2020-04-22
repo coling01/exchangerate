@@ -22,8 +22,8 @@ public class ExternalApiClient {
     this.objectMapper = objectMapper;
   }
 
-  public ClientExchangeRates getExchangeRates(String date) {
-    final String url = baseUrl + "/" + date;
+  public ClientExchangeRates getExchangeRates(String date, String currencyCodes) {
+    final String url = baseUrl + "/" + date + "?" + "symbols=" + currencyCodes;
     log.info("Requesting external exchange rates from:{}", url);
     try {
       ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);

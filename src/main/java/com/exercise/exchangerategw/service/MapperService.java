@@ -26,7 +26,7 @@ public class MapperService {
   }
 
   private void mapBaseCurrency(ExchangeRates outbound, String inboundBase) {
-    if(outbound.getBase()!=null && outbound.getBase()!=inboundBase){
+    if (outbound.getBase() != null && !outbound.getBase().equals(inboundBase)) {
       log.error("Mapping error. ExchangeRate base:{} differs from base:{}", outbound.getBase(), inboundBase);
       throw new MappingException("None matching base rates from client");
     }
@@ -34,15 +34,15 @@ public class MapperService {
   }
 
   private void mapRates(ExchangeRates outbound, List<ClientExchangeRates> inboundRates) {
-    Map<String,List<ExchangeRate>> ratesByCurrency=new HashMap<>();
+    Map<String, List<ExchangeRate>> ratesByCurrency = new HashMap<>();
     for (ClientExchangeRates inbound : inboundRates) {
-      Map<String,String> rates = inbound.getRates();
-      for( String currency: rates.keySet()){
+      Map<String, String> rates = inbound.getRates();
+      for (String currency : rates.keySet()) {
         addRateToList(ratesByCurrency, currency, inbound.getDate(), rates.get(currency));
       }
     }
     List<CurrencyExchangeRate> currencyList = new ArrayList<>();
-    for(String currency: ratesByCurrency.keySet()){
+    for (String currency : ratesByCurrency.keySet()) {
       CurrencyExchangeRate rate = new CurrencyExchangeRate();
       rate.setCurrencyCode(currency);
       rate.setRates(ratesByCurrency.get(currency));
@@ -51,17 +51,20 @@ public class MapperService {
     outbound.setCurrencies(currencyList);
   }
 
-  private void addRateToList(Map<String,List<ExchangeRate>> ratesByCurrency, final String currency, final String date, final String rate){
+  private void addRateToList(Map<String, List<ExchangeRate>> ratesByCurrency, final String currency, final String date, final String rate) {
     ExchangeRate exchangeRate = new ExchangeRate();
     exchangeRate.setDate(date);
-    exchangeRate.setRate(Float.valueOf(rate));
-    if(ratesByCurrency.containsKey(currency)){
+    try {
+      exchangeRate.setRate(Float.valueOf(rate));
+    } catch (Exception e) {
+      log.error("Casting error ..." + e);
+    }
+    if (ratesByCurrency.containsKey(currency)) {
       List<ExchangeRate> dateList = ratesByCurrency.get(currency);
       dateList.add(exchangeRate);
       ratesByCurrency.put(currency, dateList);
-    }
-    else {
-      List<ExchangeRate> dateList=new ArrayList<>();
+    } else {
+      List<ExchangeRate> dateList = new ArrayList<>();
       dateList.add(exchangeRate);
       ratesByCurrency.put(currency, dateList);
     }

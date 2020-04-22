@@ -14,7 +14,7 @@ public class DatesService {
   i.e. 31-05 goes back to 30-04
    */
   public List<LocalDate> calcTargetDates(LocalDate startDate) {
-    return IntStream.range(0, 6).boxed().map(n -> startDate.minusMonths(n)).collect(Collectors.toList());
+    return IntStream.range(0, 1).boxed().map(n -> startDate.minusMonths(n)).collect(Collectors.toList());
   }
 
 }

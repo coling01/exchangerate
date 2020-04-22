@@ -37,20 +37,20 @@ public class ExternalApiClientTest {
   @Test
   public void shouldMapJsonToGeneratedResponseObject() throws JsonProcessingException {
     stubApiClient("/stubbed/2020-01-10", 200, clientResponseJson());
-    ClientExchangeRates response = externalApiClient.getExchangeRates("2020-01-10");
+    ClientExchangeRates response = externalApiClient.getExchangeRates("2020-01-10", "GBP,HKD,USD");
     assertResponseBody(response);
   }
 
   @Test(expected = HttpClientErrorException.class)
   public void shouldSurfaceClientException() throws JsonProcessingException {
     stubApiClient("/stubbed/2020-01-10", 400, clientResponseJson());
-    externalApiClient.getExchangeRates("2020-01-10");
+    externalApiClient.getExchangeRates("2020-01-10", "GBP,HKD,USD");
   }
 
   @Test(expected = HttpServerErrorException.class)
   public void shouldSurfaceServerException() throws JsonProcessingException {
     stubApiClient("/stubbed/2020-01-10", 500, clientResponseJson());
-    externalApiClient.getExchangeRates("2020-01-10");
+    externalApiClient.getExchangeRates("2020-01-10", "GBP,HKD,USD");
   }
 
   private void stubApiClient(final String stubbedUrl, final int responseCode, final String jsonResponse) {
