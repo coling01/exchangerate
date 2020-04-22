@@ -2,9 +2,14 @@
 
 ## TODO
 * Use a generated client api rather than the restTemplate currently used. We have proved the client spec model.
-* UI
+* Extend the spec to cover errors
+* Discuss / agree information exposed on errors / error message.
+* Tidy the Mapper its too complicated
+* Use immutable builders to create mapping objects rather than the wide open generated classes.
+* UI - Lots to agree on this so not a quick job.
 * CI Build - We would likely want to build the artifacts and run tests in a ci pipe thus need a Jenkinsfile or gitlab-ci.yml definition
 * The CI build should include running unit and integration tests as well as sonar, checkmarx, style checks, owasp cve
+* Actuator - Expose version and health information
 * Docker - We may want to spin the api up in a docker instance thus may need a docker-compose file
 * Docker image - We may want to deploy the built artfiacts as docker containers thus may need a Dockerfile
 * Stubbing - We may want to create an internal stubbed version of the external service to allow integration testing
