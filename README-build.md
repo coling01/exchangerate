@@ -36,7 +36,7 @@ mvn spring-boot:run
 
 Access the running application here
 
-[Exchange Rates](http://localhost:8080/exchangerates)
+[http://localhost:8080/exchangerates](http://localhost:8080/exchangerates)
 
 
 
