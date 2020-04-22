@@ -3,7 +3,7 @@
 ## Build
 
 This restful api is maven java8 project built with SpringBoot. It requires access to maven central repository to build.
-
+It is hosted on github here [https://github.com/coling01/exchangerate](https://github.com/coling01/exchangerate)
 
 
 To build the project:
