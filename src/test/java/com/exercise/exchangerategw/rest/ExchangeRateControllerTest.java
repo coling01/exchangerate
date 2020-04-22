@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-class ExchangeRateControllerTest {
+public class ExchangeRateControllerTest {
 
   @MockBean
   ExchangeRateService exchangeRateService;

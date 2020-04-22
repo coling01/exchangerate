@@ -4,10 +4,10 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ExchangerategwApplicationTests {
+public class ExchangerategwApplicationTests {
 
   @Test
-  void contextLoads() {
+  public void contextLoads() {
   }
 
 }

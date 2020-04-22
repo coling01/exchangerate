@@ -57,7 +57,7 @@ public class ExternalApiClientTest {
     wireMockRule.stubFor(WireMock.get(urlEqualTo(stubbedUrl))
       .willReturn(aResponse()
         .withHeader("Content-Type", "text/json; charset=utf-8")
-        .withBody(clientResponseJson())
+        .withBody(jsonResponse)
         .withStatus(responseCode)
       ));
   }
