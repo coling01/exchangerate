@@ -30,12 +30,6 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>org.junit.vintage</groupId>
-          <artifactId>junit-vintage-engine</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -152,6 +146,27 @@
                   <generateApis>false</generateApis>
                   <modelPackage>server.exchangerate</modelPackage>
                   <invokerPackage>server.exchangerate</invokerPackage>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.1.1</version>
+            <executions>
+              <execution>
+                <id>client-jar</id>
+                <phase>generate-resources</phase>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+                <configuration>
+                  <classifier>client</classifier>
+                  <includes>
+                    <include>/client/**</include>
+                    <include>/public/spec-server-api.yaml</include>
+                  </includes>
                 </configuration>
               </execution>
             </executions>

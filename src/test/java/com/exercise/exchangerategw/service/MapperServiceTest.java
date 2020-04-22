@@ -1,6 +1,6 @@
 package com.exercise.exchangerategw.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import static java.util.Arrays.asList;
 import client.exchangerate.ClientExchangeRates;
@@ -36,10 +36,10 @@ public class MapperServiceTest {
     assertEquals(1, exchangeRates.getCurrencies().size());
     assertEquals("GBP", exchangeRates.getCurrencies().get(0).getCurrencyCode());
     assertEquals(2, exchangeRates.getCurrencies().get(0).getRates().size());
-    assertEquals("2020-02-28", exchangeRates.getCurrencies().get(0).getRates().get(0).getDate());
-    assertEquals(0.801f, exchangeRates.getCurrencies().get(0).getRates().get(0).getRate());
-    assertEquals("2020-01-28", exchangeRates.getCurrencies().get(0).getRates().get(1).getDate());
-    assertEquals(0.799f, exchangeRates.getCurrencies().get(0).getRates().get(1).getRate());
+    assertEquals("2020-02-28", exchangeRates.getCurrencies().get(0).getRates().get(0).getDate().toString());
+    assertEquals("0.801", exchangeRates.getCurrencies().get(0).getRates().get(0).getRate().toString());
+    assertEquals("2020-01-28", exchangeRates.getCurrencies().get(0).getRates().get(1).getDate().toString());
+    assertEquals("0.799", exchangeRates.getCurrencies().get(0).getRates().get(1).getRate().toString());
   }
 
   private ClientExchangeRates mockExchangeRates1() {

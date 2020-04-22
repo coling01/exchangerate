@@ -1,6 +1,7 @@
 package com.exercise.exchangerategw.service;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
@@ -34,9 +35,9 @@ public class ExchangeRateServiceTest {
 
   @Test
   public void shouldCallUnderlyingServices() {
-    when(datesService.calcTargetDates(any(LocalDate.class))).thenReturn(asList(LocalDate.now()));
-    exchangeRateService.getExchangeRate(LocalDate.of(2020,1,31), "GBD,HKD,USD");
-    verify(datesService).calcTargetDates(any(LocalDate.class));
+    when(datesService.calcTargetDates(any(LocalDate.class), anyInt())).thenReturn(asList(LocalDate.now()));
+    exchangeRateService.getExchangeRate(LocalDate.of(2020,1,31), "GBD,HKD,USD", 1);
+    verify(datesService).calcTargetDates(any(LocalDate.class), anyInt());
     verify(externalApiClient).getExchangeRates(anyString(), anyString());
     verify(mapperService).mapClientExchangeRates(anyList());
   }

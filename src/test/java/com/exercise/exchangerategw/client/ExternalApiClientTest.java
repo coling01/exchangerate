@@ -2,7 +2,7 @@ package com.exercise.exchangerategw.client;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import client.exchangerate.ClientExchangeRates;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -36,20 +36,20 @@ public class ExternalApiClientTest {
 
   @Test
   public void shouldMapJsonToGeneratedResponseObject() throws JsonProcessingException {
-    stubApiClient("/stubbed/2020-01-10", 200, clientResponseJson());
+    stubApiClient("/stubbed/2020-01-10?symbols=GBP,HKD,USD", 200, clientResponseJson());
     ClientExchangeRates response = externalApiClient.getExchangeRates("2020-01-10", "GBP,HKD,USD");
     assertResponseBody(response);
   }
 
   @Test(expected = HttpClientErrorException.class)
   public void shouldSurfaceClientException() throws JsonProcessingException {
-    stubApiClient("/stubbed/2020-01-10", 400, clientResponseJson());
+    stubApiClient("/stubbed/2020-01-10?symbols=GBP,HKD,USD", 400, clientResponseJson());
     externalApiClient.getExchangeRates("2020-01-10", "GBP,HKD,USD");
   }
 
   @Test(expected = HttpServerErrorException.class)
   public void shouldSurfaceServerException() throws JsonProcessingException {
-    stubApiClient("/stubbed/2020-01-10", 500, clientResponseJson());
+    stubApiClient("/stubbed/2020-01-10?symbols=GBP,HKD,USD", 500, clientResponseJson());
     externalApiClient.getExchangeRates("2020-01-10", "GBP,HKD,USD");
   }
 

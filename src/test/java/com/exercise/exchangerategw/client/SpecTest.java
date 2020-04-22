@@ -1,6 +1,6 @@
 package com.exercise.exchangerategw.client;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import client.exchangerate.ClientExchangeRates;
 import com.fasterxml.jackson.core.JsonProcessingException;

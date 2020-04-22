@@ -2,6 +2,7 @@ package com.exercise.exchangerategw.service;
 
 import client.exchangerate.ClientExchangeRates;
 import com.exercise.exchangerategw.exceptions.MappingException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,7 +55,7 @@ public class MapperService {
 
   private void addRateToList(Map<String, List<ExchangeRate>> ratesByCurrency, final String currency, final String date, final Float rate) {
     ExchangeRate exchangeRate = new ExchangeRate();
-    exchangeRate.setDate(date);
+    exchangeRate.setDate(LocalDate.parse(date));
     exchangeRate.setRate(rate);
     if (ratesByCurrency.containsKey(currency)) {
       List<ExchangeRate> dateList = ratesByCurrency.get(currency);

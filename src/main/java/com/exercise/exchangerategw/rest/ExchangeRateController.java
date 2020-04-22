@@ -11,6 +11,8 @@ import server.exchangerate.ExchangeRates;
 @Slf4j
 @Controller
 public class ExchangeRateController {
+  private static final String CURRENCY_CODES = "GBP,HKD,USD";
+  private static final int NUMBER_OF_MONTHS = 1;
   private ExchangeRateService exchangeRateService;
 
   public ExchangeRateController(final ExchangeRateService exchangeRateService) {
@@ -19,10 +21,9 @@ public class ExchangeRateController {
 
   @GetMapping(value = "/exchangerates")
   public ResponseEntity<ExchangeRates> getExchangeRate() {
-    log.info("Requested getExchangeRate");
+    log.info("Incoming request to getExchangeRate");
     LocalDate targetDate = LocalDate.now();
-    final String currencyCodes="GBP,HKD,USD";
-    return ResponseEntity.ok(exchangeRateService.getExchangeRate(targetDate, currencyCodes));
+    return ResponseEntity.ok(exchangeRateService.getExchangeRate(targetDate, CURRENCY_CODES, NUMBER_OF_MONTHS));
   }
 
 }

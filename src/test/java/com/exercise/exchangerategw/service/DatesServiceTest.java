@@ -17,7 +17,7 @@ public class DatesServiceTest {
 
   @Test
   public void shouldCalculateLast6MonthsDates(){
-    List<LocalDate> dateList = datesService.calcTargetDates(LocalDate.of(2020, 7, 31));
+    List<LocalDate> dateList = datesService.calcTargetDates(LocalDate.of(2020, 7, 31), 6);
     assertEquals(6, dateList.size());
     assertEquals("2020-07-31", dateList.get(0).toString());
     assertEquals("2020-06-30", dateList.get(1).toString());
