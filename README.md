@@ -13,3 +13,5 @@ The most significant gap is the omission of authentication between the UI and th
 
 [gw readme](./exchangerategw/README.md)
 
+The project is locate on github here
+https://github.com/coling01/exchangerate
