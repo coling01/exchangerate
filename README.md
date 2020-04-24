@@ -1,19 +1,17 @@
 # Ratesapi gateway assessment
 
-There are many queries with this assignment which means we have not built the whole task, rather started the process in a modular way.
-This README outlines the approach taken and why.
+This project aims to demonstrate good coding practices.
 
-[Spec](./README-spec.md)
+Starting with an implementation of a rest api to retrieve and aggregate responses from an external service.
 
-[Approach](./README-approach.md)
+A simple thymeleaf has been added later, since additional time was available.
 
-[Queries](./README-queries.md)
+There are some gaps in the implementation due to time pressures and the late decision to include a ui.
+The most significant gap is the omission of authentication between the UI and the API.
 
-[Acceptance criteria](./README-ac.md)
+[ui readme](exchangeui/README-spec.md)
 
-[TODO](./README-todo.md)
-
-[Build / Run](./README-build.md)
+[gw readme](exchangegw/README-spec.md)
 
 
 
