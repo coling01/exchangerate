@@ -9,9 +9,7 @@ A simple thymeleaf has been added later, since additional time was available.
 There are some gaps in the implementation due to time pressures and the late decision to include a ui.
 The most significant gap is the omission of authentication between the UI and the API.
 
-[ui readme](exchangeui/README-spec.md)
+[ui readme](./exchangerateui/README.md)
 
-[gw readme](exchangegw/README-spec.md)
-
-
+[gw readme](./exchangerategw/README.md)
 
