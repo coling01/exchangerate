@@ -31,7 +31,7 @@ public class FunctionalApiClientTest {
 
   @Test
   public void shouldMapJsonToGeneratedResponseObject() throws JsonProcessingException {
-    ExchangeRates response = externalApiClient.getExchangeRates("2020-01-10", 3, "GBP");
+    ExchangeRates response = externalApiClient.getExchangeRates(3);
     assertResponseBody(response);
   }
 

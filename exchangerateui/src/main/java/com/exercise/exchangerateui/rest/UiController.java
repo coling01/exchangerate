@@ -25,10 +25,10 @@ public class UiController {
 
   @GetMapping(value = "/exchangerates")
   public String exchangeRates(
-    @RequestParam(name = "months", required = false, defaultValue = "")
+    @RequestParam(name = "months", required = false, defaultValue = "1")
       int months, Model model) {
     log.info("GET Retrieving {} months exchange rates", months);
-    ExchangeRates rates = apiClient.getExchangeRates("2020-04-01", months, "GBP");
+    ExchangeRates rates = apiClient.getExchangeRates(months);
     List<CurrencyExchangeRate> ratesCurrencies = rates.getCurrencies();
     model.addAttribute("months", months);
     model.addAttribute("dates", getCurrencyDates(ratesCurrencies));

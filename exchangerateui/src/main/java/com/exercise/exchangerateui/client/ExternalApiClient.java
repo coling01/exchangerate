@@ -16,8 +16,8 @@ public class ExternalApiClient {
     this.defaultApi = defaultApi;
   }
 
-  public ExchangeRates getExchangeRates(String date, int months, String currencyCodes) {
-    log.info("Requesting external exchange rates for date:{}", date);
+  public ExchangeRates getExchangeRates(int months) {
+    log.info("Requesting external exchange rates for {} months", months);
     try {
       return defaultApi.exchangeratesGet(months);
     } catch (ApiException e) {
