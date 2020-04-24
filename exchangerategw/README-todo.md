@@ -4,6 +4,7 @@
 
 * ~~Use a generated client api rather than the restTemplate currently used. We have proved the client spec model.~~
 * Extend the spec to cover errors
+* Limit the number of months on the incoming controller, best in the spec.
 * Discuss / agree information exposed on errors / error message.
 * Tidy the Mapper its too complicated
 * Use immutable builders to create mapping objects rather than the wide open generated classes.
