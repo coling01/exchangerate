@@ -34,7 +34,7 @@ public class ExchangeRateIntegrationTest {
   @Test
   public void shouldReturnExchangeRatesForMockedClient() throws Exception {
     when(externalApiClient.getExchangeRates(anyString(), anyString())).thenReturn(dummyExchangeRates());
-    mockMvc.perform(MockMvcRequestBuilders.get("/exchangerates"))
+    mockMvc.perform(MockMvcRequestBuilders.get("/exchangerates?months=1"))
       .andExpect(status().isOk())
       .andExpect(jsonPath("$.base").value("EUR"))
       .andExpect(jsonPath("$.currencies.length()").value(1))

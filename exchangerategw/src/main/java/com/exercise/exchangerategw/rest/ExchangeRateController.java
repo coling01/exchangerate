@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import server.exchangerate.ExchangeRates;
 
 @Slf4j
@@ -20,10 +21,10 @@ public class ExchangeRateController {
   }
 
   @GetMapping(value = "/exchangerates")
-  public ResponseEntity<ExchangeRates> getExchangeRate() {
+  public ResponseEntity<ExchangeRates> getExchangeRate(@RequestParam(value = "months", required = false, defaultValue = "1") Integer months) {
     log.info("Incoming request to getExchangeRate");
     LocalDate targetDate = LocalDate.now();
-    return ResponseEntity.ok(exchangeRateService.getExchangeRate(targetDate, CURRENCY_CODES, NUMBER_OF_MONTHS));
+    return ResponseEntity.ok(exchangeRateService.getExchangeRate(targetDate, CURRENCY_CODES, months));
   }
 
 }

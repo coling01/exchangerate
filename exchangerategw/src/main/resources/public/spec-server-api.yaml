@@ -5,24 +5,26 @@ info:
     description: Microservice for retrieving exchange rates information
 
 paths:
-    /rates:
+    /exchangerates:
         get:
             description: Get exchange rates
+            parameters:
+                -   in: query
+                    name: months
+                    description: The number of previous months to retrieve
+                    schema:
+                        type: integer
+                    required: false
+
             responses:
                 '200':
                     description: Object containing exchange rates information
                     content:
                         application/json:
                             schema:
-                                type: array
-                                items:
-                                    $ref: '#/components/schemas/ExchangeRates'
+                                  $ref: '#/components/schemas/ExchangeRates'
 
 components:
-    securitySchemes:
-        BasicAuth:
-          type: http
-          scheme: basic
     schemas:
         ExchangeRates:
             description: Exchange rates for multiple currencies for a single base currency
