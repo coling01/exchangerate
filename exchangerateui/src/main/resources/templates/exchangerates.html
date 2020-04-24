@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <link rel="stylesheet" th:href="@{/css/exchangerates.css}"/>
+</head>
+<h1>Exchange rates</h1>
+
+<table class="rates-table">
+  <tr>
+    <th>Currency</th>
+    <th th:each="date: ${dates}"><span th:text="${date}"></span></th>
+  </tr>
+  <tr th:each="currencyRate: ${rates}">
+    <td><span th:text="${currencyRate.currencyCode}"> Currency </span></td>
+    <td th:each="rate: ${currencyRate.rates}">
+      <span th:text="${rate.rate}"></span>
+    </td>
+  </tr>
+</table>
+
+<div class="submit-button">
+  <form method="get">
+    <button type="submit" name="months" value="6" th:if="${months== 1}" href="/exchangerates?months=6">Show 6 months</button>
+    <button type="submit" name="months" value="1" th:unless="${months== 1}" href="/exchangerates?months=6">Show 1 month</button>
+  </form>
+</div>
+
+</html>
