@@ -1,12 +1,13 @@
 [Back to parent README](./README.md)
 
 ## TODO
-* Use a generated client api rather than the restTemplate currently used. We have proved the client spec model.
+
+* ~~Use a generated client api rather than the restTemplate currently used. We have proved the client spec model.~~
 * Extend the spec to cover errors
 * Discuss / agree information exposed on errors / error message.
 * Tidy the Mapper its too complicated
 * Use immutable builders to create mapping objects rather than the wide open generated classes.
-* UI - Lots to agree on this so not a quick job.
+* ~~UI - Lots to agree on this so not a quick job.~~
 * CI Build - We would likely want to build the artifacts and run tests in a ci pipe thus need a Jenkinsfile or gitlab-ci.yml definition
 * The CI build should include running unit and integration tests as well as sonar, checkmarx, style checks, owasp cve
 * Actuator - Expose version and health information
