@@ -1,0 +1,14 @@
+{
+  "base": "EUR",
+  "currencies": [
+    {
+      "currency_code": "GBP",
+      "rates": [
+        {
+          "date": "2020-04-20",
+          "rate": 0.802
+        }
+      ]
+    }
+  ]
+}

@@ -38,15 +38,6 @@ Access the running application here
 
 [http://localhost:8080/exchangerates](http://localhost:8080/exchangerates)
 
-The api is configured with Basic Authentication which requires a username and password passing in
-as an Authorization header. Failed authentication will return 401 "Unauthorised"
-This can be passed from curl command with "-u user:password"
-This can be enabled, with username and password set in application.properties.
-i.e.
-application.authentication.enabled=false
-application.authentication.user=admin
-application.authentication.password=admin
-
 
 
 #### Build / Running Tests in Intellij

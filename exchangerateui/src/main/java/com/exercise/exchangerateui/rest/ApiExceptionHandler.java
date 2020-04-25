@@ -1,6 +1,5 @@
 package com.exercise.exchangerateui.rest;
 
-import exceptions.AuthenticationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,14 +11,8 @@ import org.springframework.web.context.request.WebRequest;
 @ControllerAdvice
 public class ApiExceptionHandler {
 
-  @ExceptionHandler(value = AuthenticationException.class)
-  protected ResponseEntity<Object> handleAuthentException(Exception e, WebRequest req) {
-    log.error("Error caught in rest layer", e);
-    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You are not authorised to retrieve Exchange Rates. Check user and password");
-  }
-
   @ExceptionHandler(value = Exception.class)
-  protected ResponseEntity<Object> handleGenericException(Exception e, WebRequest req) {
+  protected ResponseEntity<Object> handleException(Exception e, WebRequest req) {
     log.error("Error caught in rest layer", e);
     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred retrieving Exchange Rates.");
   }
