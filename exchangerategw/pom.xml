@@ -18,13 +18,17 @@
   <properties>
     <java.version>1.8</java.version>
     <clientSpec>src/main/resources/public/spec-client-api.yaml</clientSpec>
-    <serverSpec>src/main/resources/public/spec-server-api.yaml</serverSpec>
+    <serverSpec>src/main/resources/public/spec-api.yaml</serverSpec>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -165,7 +169,7 @@
                   <classifier>client</classifier>
                   <includes>
                     <include>/client/**</include>
-                    <include>/public/spec-server-api.yaml</include>
+                    <include>/public/spec-api.yaml</include>
                   </includes>
                 </configuration>
               </execution>

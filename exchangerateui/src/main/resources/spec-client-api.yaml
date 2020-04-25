@@ -62,3 +62,6 @@ components:
                     description: Exchange rate on given date i.e. 0.80213
                     type: number
                     format: float
+
+security:
+  - BasicAuth: []
