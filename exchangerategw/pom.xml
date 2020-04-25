@@ -17,7 +17,7 @@
 
   <properties>
     <java.version>1.8</java.version>
-    <clientSpec>src/main/resources/public/spec-client-api.yaml</clientSpec>
+    <clientSpec>src/main/resources/spec-client-api.yaml</clientSpec>
     <serverSpec>src/main/resources/public/spec-api.yaml</serverSpec>
   </properties>
 
