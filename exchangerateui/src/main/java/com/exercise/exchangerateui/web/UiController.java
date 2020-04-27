@@ -1,4 +1,4 @@
-package com.exercise.exchangerateui.rest;
+package com.exercise.exchangerateui.web;
 
 import client.exchangerate.CurrencyExchangeRate;
 import client.exchangerate.ExchangeRate;

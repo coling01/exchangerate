@@ -1,4 +1,4 @@
-package com.exercise.exchangerateui.rest;
+package com.exercise.exchangerateui.web;
 
 import exceptions.AuthenticationException;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +10,7 @@ import org.springframework.web.context.request.WebRequest;
 
 @Slf4j
 @ControllerAdvice
-public class ApiExceptionHandler {
+public class WebExceptionHandler {
 
   @ExceptionHandler(value = AuthenticationException.class)
   protected ResponseEntity<Object> handleAuthentException(Exception e, WebRequest req) {

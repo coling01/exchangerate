@@ -6,6 +6,7 @@ import client.exchangerate.DefaultApi;
 import client.exchangerate.ExchangeRates;
 import client.swagger.ApiClient;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import java.util.Base64;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -25,12 +26,15 @@ public class FunctionalApiClientTest {
     DefaultApi defaultApi = new DefaultApi();
     ApiClient apiClient = new ApiClient();
     apiClient.setBasePath("http://localhost:8080");
+    String notEncoded = "gwadmin" + ":" + "gwadmin";
+    String encodedAuth = Base64.getEncoder().encodeToString(notEncoded.getBytes());
+    apiClient.addDefaultHeader("Authorization", "Basic " + encodedAuth);
     defaultApi.setApiClient(apiClient);
     externalApiClient = new ExternalApiClient(defaultApi);
   }
 
   @Test
-  public void shouldMapJsonToGeneratedResponseObject() throws JsonProcessingException {
+  public void shouldCallAuthenticatedApiClient() throws JsonProcessingException {
     ExchangeRates response = externalApiClient.getExchangeRates(3);
     assertResponseBody(response);
   }
